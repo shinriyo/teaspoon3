@@ -123,12 +123,13 @@ def call_func(self, uri, error=call_func_error):
         
     # decodes the query string / form body
     # ORIGINAL self.kw = form_decode('&'.join([self.request.uri.partition('?')[2], self.request.body]))
-    body_req = ''.encode('utf-8')
+    body_req = ''
     try:
-        body_req = self.request.body.encode('utf-8')
+        body_req = self.request.body.decode('utf-8')
     except (TypeError, AttributeError) as e:
         body_req = self.request.body
-    self.kw = form_decode('&'.encode('utf-8').join([self.request.uri.partition('?')[2].encode('utf-8'), body_req]))
+    self.kw = form_decode('&'.join([self.request.uri.partition('?')[2], body_req]))
+    #self.kw = form_decode('&'.encode('utf-8').join([self.request.uri.partition('?')[2].encode('utf-8'), body_req]))
     # calls the function. if arguments cause TypeError will raise 500 error
     func(*self.args, **self.kw)
 

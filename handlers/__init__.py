@@ -36,7 +36,8 @@ application = Application([
 __serve__ = lambda: start()
 
 #TODO
-__stop__ = lambda: IOLoop.instance().close(True)
+#__stop__ = lambda: IOLoop.instance().close(True)
+__stop__ = lambda: IOLoop.instance().stop()
 
 def start():
     application.listen(8888)
