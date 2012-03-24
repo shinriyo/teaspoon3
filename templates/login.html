@@ -1,0 +1,12 @@
+{% set qs = '' %}
+{% if next %}
+    <span style="color: red">you need to login in order to access <u>{{ next }}</u></span>
+    {% set qs = '?next=%s'%next %}
+{% end %}
+<form action="/login{{ qs }}" method="post">
+    <table>
+        <tr><td>user_name:</td><td><input name="user_name" value="{{ user_name }}"/></td></tr>
+        <tr><td>password:</td><td><input name="password" type="password"/></td></tr><br/>
+        <tr><td></td><td style="text-align: right"><input type="submit" value="login"/></td></tr>
+    </table>
+</form>
